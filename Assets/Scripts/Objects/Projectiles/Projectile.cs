@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
-	float projectileSpeed = 15;
+	public float projectileSpeed = 15;
 	bool fireRight = true;
 	public int bulletDamage;
     public float direction;
@@ -35,11 +35,13 @@ public class Projectile : MonoBehaviour
     
 	void OnTriggerEnter2D (Collider2D other)
 	{
+        Debug.Log("Collided with " + other.name);
 		if (other.CompareTag ("Enemy")) {
-		EnemyHealth eh = (EnemyHealth)other.GetComponent ("EnemyHealth");
+            EnemyHealth eh = findEnemyHealth(other.gameObject);
 		eh.adjustCurrentHealth(-bulletDamage);
+        DestroyObject(gameObject);
 		}
-        else if (other.CompareTag("Player"))
+        else if (!myType.Equals("Player") && other.CompareTag("Player"))
         {
             DestroyObject(gameObject);
             GameObject go = other.gameObject.transform.parent.gameObject;
@@ -56,6 +58,19 @@ public class Projectile : MonoBehaviour
     public void setDirection(float directionValue)
     {
        direction = directionValue;
+    }
+    public EnemyHealth findEnemyHealth(GameObject obj)
+    {
+        EnemyHealth eh = (EnemyHealth)obj.transform.GetComponent<EnemyHealth>();
+        if (eh == null)
+        {
+            eh = obj.transform.parent.GetComponent<EnemyHealth>();
+        }
+        if (eh == null)
+        {
+            eh = obj.transform.parent.parent.GetComponent<EnemyHealth>();
+        }
+        return eh;
     }
 }
 
