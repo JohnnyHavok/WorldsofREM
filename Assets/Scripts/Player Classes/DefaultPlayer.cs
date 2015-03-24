@@ -21,7 +21,7 @@ public class DefaultPlayer : Player
 		// Use this for initialization
 		void Start ()
 		{
-            thisRigidbody = rigidbody2D;
+            thisRigidbody = GetComponent<Rigidbody2D>();
             thisTransform = transform;
             runSpeed = PropertyManager.getInstance().RunSpeed;
 		}
@@ -70,7 +70,7 @@ public class DefaultPlayer : Player
 				if (grounded) {
                     Debug.Log("Jumping");
 						//rigidbody2D.AddForce (transform.up * PropertyManager.getInstance ().JumpHeight, ForceMode.Impulse);
-                    rigidbody2D.AddForce(transform.up * PropertyManager.getInstance().JumpHeight, ForceMode2D.Impulse);
+                    GetComponent<Rigidbody2D>().AddForce(transform.up * PropertyManager.getInstance().JumpHeight, ForceMode2D.Impulse);
 						grounded = false;
 				}
 				
@@ -106,7 +106,7 @@ public class DefaultPlayer : Player
 		override public void KillPlayer ()
 		{
 				//GetComponent<Animator>().SetBool("Alive",false);
-				rigidbody.isKinematic = true;
+				GetComponent<Rigidbody>().isKinematic = true;
 				IsAlive = false;
 		}
 

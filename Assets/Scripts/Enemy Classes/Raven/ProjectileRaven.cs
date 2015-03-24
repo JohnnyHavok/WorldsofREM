@@ -37,7 +37,6 @@ public class ProjectileRaven : MonoBehaviour {
         _controller.onControllerCollidedEvent += onControllerCollider;
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
         _controller.onTriggerExitEvent += onTriggerExitEvent;
-        rand = new Random();
     }
 
     #region Event Listeners
@@ -89,7 +88,7 @@ public class ProjectileRaven : MonoBehaviour {
             {
                 _animator.StopPlayback();
                 _animator.Play(Animator.StringToHash("Flying"));
-                _velocity.x = flightSpeed;
+                _velocity.x = flightSpeed * transform.localScale.x;
             }
 
             if (projectileTimer > projectileCooldown)

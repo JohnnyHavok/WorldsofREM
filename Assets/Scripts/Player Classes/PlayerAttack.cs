@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour {
 
 	public float attackTimer;
     public float aliveTimer;
-    public float maxTime = .1f;
+    public float maxTime = .5f;
 	// Use this for initialization
 	void Start () {
 		attackTimer = 0;

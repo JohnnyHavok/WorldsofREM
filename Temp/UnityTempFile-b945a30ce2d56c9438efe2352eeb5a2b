@@ -1,0 +1,92 @@
+-debug
+-target:library
+-nowarn:0169
+-out:Temp/Assembly-CSharp.dll
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll"
+-r:"C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll"
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll"
+-define:UNITY_4_6_0
+-define:UNITY_4_6
+-define:UNITY_STANDALONE_WIN
+-define:ENABLE_MICROPHONE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_NEW_HIERARCHY 
+-define:ENABLE_AUDIO_FMOD
+-define:UNITY_STANDALONE
+-define:ENABLE_MONO
+-define:ENABLE_TERRAIN
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_GENERICS
+-define:INCLUDE_WP8SUPPORT
+-define:ENABLE_MOVIES
+-define:ENABLE_WWW
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_4_6_FEATURES
+-define:INCLUDE_WP_BLUE_SUPPORT
+-define:ENABLE_WEBCAM
+-define:INCLUDE_METROSUPPORT
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_NETWORK
+-define:ENABLE_PHYSICS
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_2D_PHYSICS
+-define:ENABLE_SHADOWS
+-define:ENABLE_AUDIO
+-define:ENABLE_NAVMESH_CARVING
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:ENABLE_PROFILER
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_WIN
+Assets/Scripts/2DController/CharacterController2D.cs
+Assets/Scripts/2DController/CharacterController2D/Demo/scripts/DemoScene.cs
+Assets/Scripts/2DController/CharacterController2D/Demo/scripts/SmoothFollow.cs
+Assets/Scripts/Abstract/Enemy.cs
+Assets/Scripts/Abstract/Player.cs
+Assets/Scripts/Abstract/Static.cs
+Assets/Scripts/Abstract/TienEntity.cs
+"Assets/Scripts/Enemy Classes/BS_Scripts/BabySpiderMovement.cs"
+"Assets/Scripts/Enemy Classes/BS_Scripts/WebShooter.cs"
+"Assets/Scripts/Enemy Classes/Colossus/BehindTrigger.cs"
+"Assets/Scripts/Enemy Classes/Colossus/ColossusController.cs"
+"Assets/Scripts/Enemy Classes/Colossus/HoeCollision.cs"
+"Assets/Scripts/Enemy Classes/Colossus/StaffCollision.cs"
+"Assets/Scripts/Enemy Classes/DefaultEnemy.cs"
+"Assets/Scripts/Enemy Classes/Doll_Scripts/DiveTrigger.cs"
+"Assets/Scripts/Enemy Classes/Doll_Scripts/DollMovement.cs"
+"Assets/Scripts/Enemy Classes/EnemyAI.cs"
+"Assets/Scripts/Enemy Classes/EnemyAttack.cs"
+"Assets/Scripts/Enemy Classes/EnemyAttackUpdate.cs"
+"Assets/Scripts/Enemy Classes/EnemyHealth.cs"
+"Assets/Scripts/Enemy Classes/Irvine/FireSeed.cs"
+"Assets/Scripts/Enemy Classes/Irvine/IrvineController.cs"
+"Assets/Scripts/Enemy Classes/Raven/ProjectileRaven.cs"
+"Assets/Scripts/Enemy Classes/Raven/RavenController.cs"
+"Assets/Scripts/Enemy Classes/TurnAround.cs"
+Assets/Scripts/Managers/AudioCont.cs
+Assets/Scripts/Managers/GameManager.cs
+Assets/Scripts/Managers/InputManager.cs
+Assets/Scripts/Managers/LevelLoader.cs
+Assets/Scripts/Managers/PropertyManager.cs
+Assets/Scripts/Managers/TienGUI.cs
+Assets/Scripts/Objects/Projectiles/NonNormalProjectile.cs
+Assets/Scripts/Objects/Projectiles/Projectile.cs
+"Assets/Scripts/Player Classes/DefaultPlayer.cs"
+"Assets/Scripts/Player Classes/LightBullet.cs"
+"Assets/Scripts/Player Classes/PlayerAttack.cs"
+"Assets/Scripts/Player Classes/PlayerAttack1.cs"
+"Assets/Scripts/Player Classes/PlayerHealth.cs"
+"Assets/Scripts/Player Classes/PlayerMode.cs"
+Assets/Scripts/Util/BuffValue.cs
+Assets/Scripts/Util/Buffed.cs
+Assets/Scripts/Util/DeathTile.cs
+Assets/Scripts/Util/DetectGround.cs
+Assets/Scripts/Util/FallApart.cs
+Assets/Scripts/Util/IgnoreCeilingCollision.cs
+Assets/Scripts/Util/PassThroughPlat.cs
+Assets/Scripts/Util/SmoothCamera2D.cs
+Assets/Scripts/Util/Targetting.cs
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Mono\lib/mono/unity\System.Runtime.Serialization.dll"
+-r:"C:/Program Files (x86)/Unity/Editor/Data/Mono\lib/mono/unity\System.Xml.Linq.dll"

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FallApart : MonoBehaviour {
 
-    public float destroyTriggerTime = 3f;
+    public float destroyTriggerTime = 1.5f;
     public float destroyTimer = 0;
 
     public bool triggered = false;

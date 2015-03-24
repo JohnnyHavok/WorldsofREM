@@ -45,6 +45,9 @@ public class ColossusController : MonoBehaviour {
     private bool left = true;
     #endregion
 
+    public float turnTimer = 0f;
+    public float turnCooldown = 5f;
+
     public float currentAttackTimer = 0;
     public string currentAttack = "idle";
 
@@ -86,7 +89,7 @@ public class ColossusController : MonoBehaviour {
 
     void onTriggerExitEvent(Collider2D col)
     {
-
+        Debug.Log("left " + col.name);
     }
 
     #endregion
@@ -158,6 +161,11 @@ public class ColossusController : MonoBehaviour {
             }
             else
             {
+                if (turnTimer > turnCooldown)
+                {
+                    left = !left;
+                    turnTimer = 0;
+                }
                 if (left)
                 {
                     normalizedHorizontalSpeed = -1;
@@ -173,6 +181,7 @@ public class ColossusController : MonoBehaviour {
                     normalizedHorizontalSpeed = 1;
                     _velocity.x = normalizedHorizontalSpeed * runSpeed * Time.deltaTime;
                }
+                turnTimer += Time.deltaTime;
             }
         }
         _velocity.x = normalizedHorizontalSpeed * runSpeed;

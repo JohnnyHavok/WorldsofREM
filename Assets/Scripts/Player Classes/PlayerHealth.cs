@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour {
 	public int currentHealth = 100;
 	private GameObject myself;
 
-    public float invulnTime = .5f;
+    public float invulnTime = 1f;
     private float invulnTimer = 0f;
     public bool invuln = false;
     // Use this for initialization
@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour {
         if (invulnTimer > invulnTime)
         {
             invuln = false;
+            invulnTimer = 0f;
         }
 		
 						
@@ -44,6 +45,7 @@ public class PlayerHealth : MonoBehaviour {
         }
         if (adj > 0)
         {
+            Debug.Log("Healing");
             currentHealth += adj;
             if (currentHealth > 100)
                 currentHealth = maxHealth;

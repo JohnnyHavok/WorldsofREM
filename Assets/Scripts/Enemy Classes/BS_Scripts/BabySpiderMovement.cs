@@ -22,7 +22,7 @@ public class BabySpiderMovement : MonoBehaviour {
     private bool left = true;
     private bool right = false;
 
-
+    private int turn;
 	// Use this for initialization
 	void Start () {
 	
@@ -88,6 +88,11 @@ public class BabySpiderMovement : MonoBehaviour {
                 _animator.StopPlayback();
                 _animator.Play(Animator.StringToHash("Jump_Forward"));
                 jumpTimer = jumpCooldown;
+                turn = Random.Range(0, 10);
+                if (turn < 2)
+                {
+                    left = !left;
+                }
             }
         }
         else

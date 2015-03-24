@@ -20,6 +20,9 @@ public class NonNormalProjectile : MonoBehaviour {
     void Start()
     {
         timeAlive = 0;
+        if (xAngle < 0)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
     }
 
     // Update is called once per frame

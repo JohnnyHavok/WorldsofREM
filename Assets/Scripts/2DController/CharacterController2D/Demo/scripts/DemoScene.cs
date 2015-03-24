@@ -44,6 +44,8 @@ public class DemoScene : MonoBehaviour
     private float shotCountdown = .5f;
     public float shotTime = 0;
 
+    public PlayerMode pm;
+
     void Awake()
 	{
 		_animator = GetComponent<Animator>();
@@ -54,6 +56,7 @@ public class DemoScene : MonoBehaviour
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
         _controller.onTriggerExitEvent += onTriggerExitEvent;
         myBoxCollider = gameObject.GetComponent<BoxCollider2D>();
+        pm = gameObject.GetComponent<PlayerMode>();
     }
 
 
@@ -97,6 +100,7 @@ public class DemoScene : MonoBehaviour
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+
         // grab our current _velocity to use as a base for all calculations
 		_velocity = _controller.velocity;
         if (airDashTime != 0)
@@ -153,7 +157,14 @@ public class DemoScene : MonoBehaviour
                 {
                     attackCount = 1;
                 }
-                attack(10);
+                if (pm.mode.Equals("melee"))
+                {
+                    attack(20);
+                }
+                else
+                {
+                    attack(10);
+                }
             }
             else if (attackCount == 1 && comboCountdown < comboTime)
             {
@@ -161,7 +172,14 @@ public class DemoScene : MonoBehaviour
                 attackCount++;
                 comboCountdown = 0;
                 comboCountdown += Time.deltaTime;
-                attack(15);
+                if (pm.mode.Equals("melee"))
+                {
+                    attack(30);
+                }
+                else
+                {
+                    attack(15);
+                }
             }
             else if(attackCount == 2 && comboCountdown < comboTime)
             {
@@ -169,10 +187,18 @@ public class DemoScene : MonoBehaviour
                 attackCount++;
                 comboCountdown = 0;
                 comboCountdown += Time.deltaTime;
-                attack(20);
+
+                if (pm.mode.Equals("melee"))
+                {
+                    attack(40);
+                }
+                else
+                {
+                    attack(20);
+                } 
             }
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             if (shotTime == 0 || shotTime > 0.4f)
             {
@@ -182,7 +208,7 @@ public class DemoScene : MonoBehaviour
                 spawnProjectile();
             }
         }
-        else if( Input.GetKey( KeyCode.RightArrow ) )
+        else if( Input.GetKey( KeyCode.D ) )
 		{
 			normalizedHorizontalSpeed = 1;
 			if( transform.localScale.x < 0f )
@@ -193,7 +219,7 @@ public class DemoScene : MonoBehaviour
             if (!_controller.isGrounded)
                 normalizedHorizontalSpeed = .9f;
         }
-		else if( Input.GetKey( KeyCode.LeftArrow ) )
+		else if( Input.GetKey( KeyCode.A ) )
 		{
 			normalizedHorizontalSpeed = -1;
 			if( transform.localScale.x > 0f )
@@ -252,7 +278,7 @@ public class DemoScene : MonoBehaviour
         }
 
 		// we can only jump whilst grounded
-		if( (_controller.isGrounded || jumpCount < 2) && Input.GetKeyDown( KeyCode.UpArrow ) )
+		if( (_controller.isGrounded || jumpCount < 2) && Input.GetKeyDown( KeyCode.W ) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
             _animator.StopPlayback();
@@ -260,7 +286,7 @@ public class DemoScene : MonoBehaviour
             jumpCount++;
 		}
 
-        if (jumpCount != 0 && !_controller.isGrounded && _velocity.y <= 0 && !isDashing)
+        if (jumpCount != 0 && !_controller.isGrounded && _velocity.y < 0 && !isDashing)
         {
             _animator.Play(Animator.StringToHash("TienFall"));
         }
@@ -275,6 +301,11 @@ public class DemoScene : MonoBehaviour
         else
             _velocity.y += gravity * Time.deltaTime;
 
+
+        if (pm.mode.Equals("speed"))
+        {
+            normalizedHorizontalSpeed *= 2;
+        }
 
         if (!isDashing)
         {

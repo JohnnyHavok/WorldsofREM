@@ -8,9 +8,9 @@ public class WebShooter : MonoBehaviour {
     public float groundDamping = 20f; // how fast do we change direction? higher means faster
     public float inAirDamping = 5f;
 
-    public float shotCooldown = 1.3f;
+    public float shotCooldown = .6f;
     public float shotTimer = 0f;
-    public float playTimer= 1.5f;
+    public float playTimer= .6f;
 
     private CharacterController2D _controller;
     private Animator _animator;
@@ -81,36 +81,40 @@ public class WebShooter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         _velocity = _controller.velocity;
+        if (_controller.isGrounded)
+        {
+            if (shotTimer == 0)
+            {
+                _animator.StopPlayback();
+                _animator.Play(Animator.StringToHash("Web_Shot"));
+            }
 
-        if (shotTimer == 0)
-        {
-            _animator.StopPlayback();
-            _animator.Play(Animator.StringToHash("Web_Shot"));
-        }
-         
-        if (shotTimer < playTimer)
-        {
-            shotTimer += Time.deltaTime;
-        }
+            if (shotTimer < playTimer)
+            {
+                shotTimer += Time.deltaTime;
+            }
 
-        if (shotTimer >= shotCooldown && fired == false)
-        {
-            fired = true;
-            shootWeb(transform.localScale.x);
-        }
-        
-        if (shotTimer >playTimer)
-        {
-            shotTimer = 0;
-            fired = false;
-            _animator.StopPlayback();
-            _animator.Play(Animator.StringToHash("Stand"));
-        }
-        
+            if (shotTimer >= shotCooldown && fired == false)
+            {
+                fired = true;
+                shootWeb(transform.localScale.x);
+            }
 
+            if (shotTimer > playTimer)
+            {
+                shotTimer = 0;
+                fired = false;
+                _animator.StopPlayback();
+                _animator.Play(Animator.StringToHash("Stand"));
+            }
+
+
+        }
         _velocity.x = 0f;
-        _velocity.y = 0f;
-
+        if (_controller.isGrounded)
+            _velocity.y = 0f;
+        else
+            _velocity.y += gravity * Time.deltaTime;
         _controller.move(_velocity * Time.deltaTime);
 
 	}

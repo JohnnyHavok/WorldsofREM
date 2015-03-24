@@ -27,6 +27,9 @@ public class DollMovement : MonoBehaviour {
 
     private GameObject attackChild;
 
+    private float turnTime;
+    private int turnChance;
+
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -82,27 +85,48 @@ public class DollMovement : MonoBehaviour {
         {
             attackTimer = 0;
         }
+        if (_controller.isGrounded)
+        {
+            turnTime += Time.deltaTime;
+        }
+
         if (!inRange && attackTimer < 3f)
         {
+
             updateAttackColliders(false);
             //previousTransform = transform;
             _velocity = _controller.velocity;
-            if (left)
+            if (turnTime > 4f)
             {
-                normalizedHorizontalSpeed = -1;
-                if (transform.localScale.x > 0f)
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                turnChance = Random.Range(0, 100);
+                if (turnChance < 3)
+                {
+                    left = !left;
+                    turnTime = 0;
+                }
+            }
+            if (_controller.isGrounded)
+            {
+                if (left)
+                {
+                    normalizedHorizontalSpeed = -1;
+                    if (transform.localScale.x > 0f)
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
+                else
+                {
+                    if (transform.localScale.x < 0f)
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    normalizedHorizontalSpeed = 1;
+                }
+                _animator.Play(Animator.StringToHash("Walk"));
+                var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping;
+                _velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime);
             }
             else
             {
-                if (transform.localScale.x < 0f)
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                normalizedHorizontalSpeed = 1;
+                _velocity.x = 0;
             }
-            _animator.Play(Animator.StringToHash("Walk"));
-            var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping;
-            _velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime);
-
             //if (previousTransform.Equals(transform))
             //{
             //    left = !left;

@@ -20,8 +20,8 @@ public class SmoothCamera2D : MonoBehaviour {
 	{
 		if (target)
 		{
-			point = camera.WorldToViewportPoint(target.position);
-			delta = target.position - camera.ViewportToWorldPoint(new Vector3(0.5f, 0.4f, point.z)); //(new Vector3(0.5, 0.5, point.z));
+			point = GetComponent<Camera>().WorldToViewportPoint(target.position);
+			delta = target.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.4f, point.z)); //(new Vector3(0.5, 0.5, point.z));
 			destination = transform.position + delta;
 			CheckBounds();
 			transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
@@ -29,8 +29,8 @@ public class SmoothCamera2D : MonoBehaviour {
 			target = GameObject.FindGameObjectWithTag("Player").transform;
 			if (target)
 			{
-				point = camera.WorldToViewportPoint(target.position);
-				delta = target.position - camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z)); //(new Vector3(0.5, 0.5, point.z));
+				point = GetComponent<Camera>().WorldToViewportPoint(target.position);
+				delta = target.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z)); //(new Vector3(0.5, 0.5, point.z));
 				destination = transform.position + delta;
 				CheckBounds();
 				transform.position = destination;

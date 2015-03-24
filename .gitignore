@@ -1,1 +1,11 @@
 *.unity
+*.7z
+
+$PROJDIR/Temp
+$PROJDIR/Library/
+$PROJDIR/Obj/
+
+*csproj
+*.unityproj
+*.sln
+*.user.*

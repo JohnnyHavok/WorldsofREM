@@ -104,8 +104,9 @@ public class IrvineController : MonoBehaviour {
     void Update()
     {
         #region Stage triggering
-        if (myHealth.currentHealth < myHealth.maxHealth / 2)
+        if (myHealth.currentHealth < myHealth.maxHealth / 2 && stage < 2)
         {
+            Debug.Log("Stage 2");
             stage = 2;
         }
 
@@ -119,23 +120,17 @@ public class IrvineController : MonoBehaviour {
             stage = 5;
         }
 
-        if (!transitioned)
+        if (stage == 2)
         {
-            if (stage == 2)
-            {
-                log.SetActive(false);
-                _animator.Play(Animator.StringToHash("IrvineTransition"));
-                transitionTimer += Time.deltaTime;
-                if (transitionTimer > 1.45f)
-                {
-                    transitioned = true;
-                }
-            }
+            Debug.Log("Stage 2 Triggered");
+            log.SetActive(false);
+            _animator.Play(Animator.StringToHash("IrvineTransition"));
+            transitionTimer += Time.deltaTime;
         }
 
         if (transitionTimer > 1.45f && stage == 2)
         {
-            stage++;
+            stage = 3;
         }
 
         #endregion
